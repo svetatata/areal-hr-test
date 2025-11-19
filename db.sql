@@ -1,6 +1,6 @@
 create database hr_tz_areal character set utf8mb4 collate utf8mb4_unicode_ci;
 use hr_tz_areal;
-
+set names utf8mb4;
 create table otdels (
     id int primary key auto_increment,
     name varchar(100) not null unique
