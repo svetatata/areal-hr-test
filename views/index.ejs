@@ -27,6 +27,8 @@
                 </option>
               <% }) %>
           </select>
+          <button type="submit">Применить</button>
+          <a href="/" class="button">Сброс</a>
         </form>
         <table class="sotr-table">
             <thead>
@@ -50,8 +52,8 @@
               <td><%= sotrudnik.passport %></td>
               <td><%= sotrudnik.phone %></td>
               <td><%= sotrudnik.address %></td>
-              <td><%= sotrudnik.otdel_id %></td>
-              <td><%= sotrudnik.position_id %></td>
+              <td><%= sotrudnik.o_name %></td>
+              <td><%= sotrudnik.p_name %></td>
               <td><%= sotrudnik.salary.toLocaleString('ru-RU') %> ₽</td>
               <td><%= new Date(sotrudnik.date_priema).toLocaleDateString('ru-RU') %></td>
             </tr>
