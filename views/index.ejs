@@ -22,7 +22,7 @@
               <option value="">все</option>
               <% positions.forEach(p => { %>
                 <option value="<%= p.name %>"
-                  <%= thisPos == p.name ? selected : ''%>>
+                  <%= thisPos == p.name ? 'selected' : ''%>>
                   <%= p.name %>
                 </option>
               <% }) %>

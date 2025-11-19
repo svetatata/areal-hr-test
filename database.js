@@ -24,7 +24,7 @@ export async function getSotrudniki(otdel = '', position = '') {
         query += ' where ' + condit.join(' and ');
     }
     query += ' order by s.last_name';
-    const [rows] = await pool.query(query)
+    const [rows] = await pool.query(query, params)
     return rows
 }
 

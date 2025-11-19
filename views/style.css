@@ -25,3 +25,11 @@ th, td {
 .filters input, .filters select {
     padding: 8px;
 }
+button, a {
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #fff;
+    background-color: #000000;
+}
