@@ -5,6 +5,7 @@ const app = express()
 const port = 8080
 app.set("view engine", "ejs")
 app.use(express.static("views"))
+app.use("/vendor", express.static("node_modules/imask/dist"))
 app.use(express.urlencoded({extended: true}))
 
 app.get('/', async (req, res) => {
@@ -24,6 +25,17 @@ app.get('/', async (req, res) => {
         searchQ
     })
 })
+app.get("/createSotrudnik", async (req, res) => {
+    const otdels = await getOtdels()
+    const positions = await getPos()
+    
+    res.render("createSotrudnik.ejs", {
+        otdels,
+        positions,
+        sotr: null 
+    })
+  } 
+)
 app.use((err, req, res, next) => {
   console.error(err.stack)
   res.status(500).send('ломай ломай мы же миллионеры')

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Форма сотрудника</title>
+    <link rel="stylesheet" href="/style.css">
+    <style>
+        form {
+            flex-direction: column;
+            max-width: 40vw;
+            margin: 0 auto;
+        }
+        .btns-action {
+            display: flex;
+            gap:10px;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form action="/createSotrudnik" method="POST" class="filters">
+            <label>Фамилия</label>
+            <input type="text" name="last_name" required>
+            <label>Имя</label>
+            <input type="text" name="first_name" required>
+            <label>Отчество</label>
+            <input type="text" name="middle_name" required>
+            <label>Дата рождения</label>
+            <input type="date" name="birth" required>
+            <label>Серия/номер паспорта (10 цифр)</label>
+            <input type="text" id="passport" name="passport" required>
+            <label>Номер телефона</label>
+            <input type="text" id="phone" name="phone" required>
+            <label>Адрес</label>
+            <textarea name="address" required></textarea>
+            <label>Отдел</label>
+            <select name="otdel_id" required>
+                <option value="">Выбрать</option>
+                <% otdels.forEach(otdel => { %>
+                    <option value="<%= otdel.id %>">
+                        <%= otdel.name %>
+                    </option>
+                <% }) %>
+            </select>
+            <label>Должность</label>
+            <select name="position_id" required>
+                <option value="">Выбрать</option>
+                <% positions.forEach(position => { %>
+                    <option value="<%= position.id %>">
+                        <%= position.name %>
+                    </option>
+                <% }) %>
+            </select>
+            <label>Размер зарплаты</label>
+            <input type="number" name="salary" min="0" step="1000" required>
+            <label>Дата принятия на работу</label>
+            <input type="date" name="date_priema" required>
+
+            <div class="btns-action">
+                <a href="/">Отмена</a>
+                <button type="submit">Создать</button>
+            </div>
+        </form>
+    </div>
+    <script src="/vendor/imask.min.js"></script>
+    <script>        
+        const passportInput = document.getElementById('passport')
+        const phoneInput = document.getElementById('phone')
+        if (passportInput) {
+            IMask(passportInput, {mask: '0000 000000'})
+        }
+        if (phoneInput) {
+            IMask(phoneInput, {mask: '+{7} (000) 000-00-00'})
+        }
+    </script>
+</body>
+</html>
