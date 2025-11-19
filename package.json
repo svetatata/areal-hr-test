@@ -1,0 +1,30 @@
+{
+  "name": "areal-hr-test",
+  "version": "1.0.0",
+  "description": "ТЗ Церковникова С.И. Ареал",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "npx nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/svetatata/areal-hr-test.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/svetatata/areal-hr-test/issues"
+  },
+  "homepage": "https://github.com/svetatata/areal-hr-test#readme",
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "mysql2": "^3.15.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.11"
+  }
+}
