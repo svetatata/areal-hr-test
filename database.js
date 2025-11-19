@@ -33,6 +33,15 @@ export async function getSotrudniki(otdel = '', position = '', searchQ = '') {
     return rows
 }
 
+export async function createSotrudnik(last_name, first_name, middle_name, birth, passport, phone, address, otdel_id, position_id, salary, date_priema) {
+    let query = 'insert into sotrudniki (last_name, first_name, middle_name, birth, passport, phone, address, otdel_id, position_id, salary, date_priema) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+    const [res] = await pool.query(query, [
+    last_name, first_name, middle_name, birth, passport,
+    phone, address, otdel_id, position_id, salary, date_priema
+    ])
+    return res
+}
+
 export async function getOtdels() {
     const [rows] = await pool.query('select * from otdels;');
     return rows

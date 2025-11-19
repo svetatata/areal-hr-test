@@ -1,5 +1,5 @@
 import express from "express"
-import { getSotrudniki, getOtdels, getPos } from "./database.js"
+import { getSotrudniki, getOtdels, getPos, createSotrudnik } from "./database.js"
 
 const app = express()
 const port = 8080
@@ -35,6 +35,25 @@ app.get("/createSotrudnik", async (req, res) => {
         sotr: null 
     })
   } 
+)
+app.post("/createSotrudnik", async (req, res) => {
+    const data = req.body
+    const passport = data.passport.replace(/\D/g, '').slice(0, 10)
+    await createSotrudnik(
+      data.last_name,
+      data.first_name,
+      data.middle_name,
+      data.birth,
+      passport,
+      data.phone,
+      data.address,
+      data.otdel_id,
+      data.position_id,
+      data.salary,
+      data.date_priema
+    )
+    res.redirect("/")
+  }
 )
 app.use((err, req, res, next) => {
   console.error(err.stack)
