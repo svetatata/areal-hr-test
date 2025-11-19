@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hr</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container">
+        <table class="sotr-table">
+            <thead>
+          <tr>
+            <th>ФИО</th>
+            <th>Дата рождения</th>
+            <th>Паспорт</th>
+            <th>Телефон</th>
+            <th>Адрес</th>
+            <th>Отдел</th>
+            <th>Должность</th>
+            <th>Зарплата</th>
+            <th>Дата приема</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% sotrudniki.forEach(sotrudnik => { %>
+            <tr>
+              <td><%= sotrudnik.last_name %> <%= sotrudnik.first_name %> <%= sotrudnik.middle_name %></td>
+              <td><%= new Date(sotrudnik.birth).toLocaleDateString('ru-RU') %></td>
+              <td><%= sotrudnik.passport %></td>
+              <td><%= sotrudnik.phone %></td>
+              <td><%= sotrudnik.address %></td>
+              <td><%= sotrudnik.otdel_id %></td>
+              <td><%= sotrudnik.position_id %></td>
+              <td><%= sotrudnik.salary.toLocaleString('ru-RU') %> ₽</td>
+              <td><%= new Date(sotrudnik.date_priema).toLocaleDateString('ru-RU') %></td>
+            </tr>
+          <% }) %>
+        </tbody>
+        </table>
+    </div>
+</body>
+</html>
