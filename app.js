@@ -10,7 +10,9 @@ app.use(express.urlencoded({extended: true}))
 app.get('/', async (req, res) => {
     const thisOtdel = req.query.otdel || ''
     const thisPos = req.query.position || ''
-    const sotrudniki = await getSotrudniki(thisOtdel, thisPos)
+    const searchQ = req.query.searchQ || ''
+
+    const sotrudniki = await getSotrudniki(thisOtdel, thisPos, searchQ)
     const otdels = await getOtdels()
     const positions = await getPos()
     res.render("index.ejs", {
@@ -18,7 +20,8 @@ app.get('/', async (req, res) => {
         otdels,
         positions,
         thisOtdel,
-        thisPos
+        thisPos,
+        searchQ
     })
 })
 app.use((err, req, res, next) => {

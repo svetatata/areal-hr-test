@@ -7,7 +7,7 @@ const pool = mysql.createPool({
   charset: 'utf8mb4'
 }).promise()
 
-export async function getSotrudniki(otdel = '', position = '') {
+export async function getSotrudniki(otdel = '', position = '', searchQ = '') {
     let query = "select s.*, o.name as o_name, p.name as p_name from sotrudniki s join otdels o on s.otdel_id = o.id join positions p on s.position_id = p.id";
     let condit = [];
     let params = [];
@@ -19,6 +19,11 @@ export async function getSotrudniki(otdel = '', position = '') {
     if (position != '') {
         condit.push('p.name = ?');
         params.push(position);
+    }
+    if (searchQ != '') {
+        condit.push('(s.last_name LIKE ? OR s.first_name LIKE ? OR s.middle_name LIKE ?)');
+        const searchP = '%' + searchQ + '%';
+        params.push(searchP, searchP, searchP);
     }
     if (condit.length > 0) {
         query += ' where ' + condit.join(' and ');
