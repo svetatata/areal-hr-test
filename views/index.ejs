@@ -11,9 +11,21 @@
         <form class="filters" action="/" method="GET">
           <select name="otdel">
             <option value="">все</option>
+            <% otdels.forEach(o=> { %>
+              <option value="<%= o.name %>"
+                <%= thisOtdel == o.name ? 'selected' : '' %>>
+                <%= o.name %>
+              </option>
+            <% }) %>
           </select>
           <select name="position">
               <option value="">все</option>
+              <% positions.forEach(p => { %>
+                <option value="<%= p.name %>"
+                  <%= thisPos == p.name ? selected : ''%>>
+                  <%= p.name %>
+                </option>
+              <% }) %>
           </select>
         </form>
         <table class="sotr-table">

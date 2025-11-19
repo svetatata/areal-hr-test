@@ -12,4 +12,13 @@ export async function getSotrudniki() {
     const [rows] = await pool.query(query)
     return rows
 }
-getSotrudniki().then(resulr=>{console.log(resulr)});
+
+export async function getOtdels() {
+    const [rows] = await pool.query('select * from otdels;');
+    return rows
+}
+
+export async function getPos() {
+    const [rows] = await pool.query('select * from positions;');
+    return rows
+}

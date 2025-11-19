@@ -1,5 +1,5 @@
 import express from "express"
-import { getSotrudniki } from "./database.js"
+import { getSotrudniki, getOtdels, getPos } from "./database.js"
 
 const app = express()
 const port = 8080
@@ -8,8 +8,14 @@ app.use(express.static("views"))
 
 app.get('/', async (req, res) => {
     const sotrudniki = await getSotrudniki()
+    const otdels = await getOtdels()
+    const positions = await getPos()
     res.render("index.ejs", {
-    sotrudniki
+    sotrudniki,
+    otdels, 
+    positions,
+    thisOtdel: req.query.otdel || '', 
+    thisPos: req.query.position || ''
     })
 })
 
