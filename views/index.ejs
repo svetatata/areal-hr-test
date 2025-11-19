@@ -7,8 +7,10 @@
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-    <div class="container">
+    <div class="container list">
         <form class="filters" action="/" method="GET">
+          <input type="text" name="searchQ" placeholder="Поиск по ФИО..." 
+             value="<%= searchQ %>">
           <select name="otdel">
             <option value="">все</option>
             <% otdels.forEach(o=> { %>
@@ -28,7 +30,7 @@
               <% }) %>
           </select>
           <button type="submit">Применить</button>
-          <a href="/" class="button">Сброс</a>
+          <a href="/">Сброс</a>
         </form>
         <table class="sotr-table">
             <thead>
@@ -60,6 +62,9 @@
           <% }) %>
         </tbody>
         </table>
+        <a href="/createSotrudnik" class="button">Добавить сотрудника</a>
     </div>
+
+    
 </body>
 </html>
