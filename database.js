@@ -32,6 +32,12 @@ export async function getSotrudniki(otdel = '', position = '', searchQ = '') {
     const [rows] = await pool.query(query, params)
     return rows
 }
+export async function getSotrudnik(id) {
+    const [rows] = await pool.query(
+      'select s.*, o.name as o_name, p.name as p_name from sotrudniki s join otdels o on s.otdel_id = o.id join positions p on s.position_id = p.id where s.id = ?', [id])
+    return rows[0]
+}
+
 export async function createSotrudnik(
     last_name,
     first_name,

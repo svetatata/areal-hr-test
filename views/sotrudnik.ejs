@@ -20,26 +20,29 @@
 </head>
 <body>
     <div class="container">
-        <form action="/sotrudnik" method="POST" class="filters">
+        <form action="<%= sotr ? '/sotrudnik/' + sotr.id : '/sotrudnik' %>" method="post" class="filters">
+            <% if (sotr) { %>
+                <input type="hidden" name="id" value="<%= sotr.id %>">
+            <% } %>
             <label>Фамилия</label>
-            <input type="text" name="last_name" required>
+            <input type="text" name="last_name" value="<%= sotr ? sotr.last_name : '' %>" required>
             <label>Имя</label>
-            <input type="text" name="first_name" required>
+            <input type="text" name="first_name" value="<%= sotr ? sotr.first_name : '' %>" required>
             <label>Отчество</label>
-            <input type="text" name="middle_name" required>
+            <input type="text" name="middle_name" value="<%= sotr ? sotr.middle_name : '' %>" required>
             <label>Дата рождения</label>
-            <input type="date" name="birth" required>
+            <input type="date" name="birth" value="<%= sotr ? sotr.birth : '' %>" required>
             <label>Серия/номер паспорта (10 цифр)</label>
-            <input type="text" id="passport" name="passport" required>
+            <input type="text" id="passport" name="passport" value="<%= sotr ? sotr.passport : '' %>" required>
             <label>Номер телефона</label>
-            <input type="text" id="phone" name="phone" required>
+            <input type="text" id="phone" name="phone" value="<%= sotr ? sotr.phone : '' %>" required>
             <label>Адрес</label>
-            <textarea name="address" required></textarea>
+            <textarea name="address" required><%= sotr ? sotr.address : '' %></textarea>
             <label>Отдел</label>
             <select name="otdel_id" required>
                 <option value="">Выбрать</option>
                 <% otdels.forEach(otdel => { %>
-                    <option value="<%= otdel.id %>">
+                    <option value="<%= otdel.id %>" <%= sotr && sotr.otdel_id == otdel.id ? 'selected' : '' %>>
                         <%= otdel.name %>
                     </option>
                 <% }) %>
@@ -48,19 +51,19 @@
             <select name="position_id" required>
                 <option value="">Выбрать</option>
                 <% positions.forEach(position => { %>
-                    <option value="<%= position.id %>">
+                    <option value="<%= position.id %>" <%= sotr && sotr.position_id == position.id ? 'selected' : '' %>>
                         <%= position.name %>
                     </option>
                 <% }) %>
             </select>
             <label>Размер зарплаты</label>
-            <input type="number" name="salary" min="0" step="1000" required>
+            <input type="number" name="salary" min="0" step="1000" value="<%= sotr ? sotr.salary : '' %>" required>
             <label>Дата принятия на работу</label>
-            <input type="date" name="date_priema" required>
+            <input type="date" name="date_priema" value="<%= sotr ? sotr.date_priema : '' %>" required>
 
             <div class="btns-action">
                 <a href="/">Отмена</a>
-                <button type="submit">Создать</button>
+                <button type="submit"><%= sotr ? 'Сохранить' : 'Создать' %></button>
             </div>
         </form>
     </div>

@@ -1,5 +1,5 @@
 import express from "express"
-import { getSotrudniki, getOtdels, getPos, createSotrudnik, updateSotrudnik } from "./database.js"
+import { getSotrudniki, getSotrudnik, getOtdels, getPos, createSotrudnik, updateSotrudnik } from "./database.js"
 
 const app = express()
 const port = 8080
@@ -40,6 +40,23 @@ app.get("/sotrudnik", async (req, res) => {
     })
   } 
 )
+app.get("/sotrudnik/:id", async (req, res) => {
+    const id = req.params.id;
+    const sotr = await getSotrudnik(id)
+    if (!sotr) {
+        return res.status(404).send('кто это?')
+    }
+    if (sotr.active === 0) {
+        return res.status(403).send('ноу ноу ноу мистер фиш ю вонт эдит зис сотрудник')
+    }
+    const otdels = await getOtdels()
+    const positions = await getPos()
+    res.render("sotrudnik.ejs", {
+        otdels,
+        positions,
+        sotr
+    })
+})
 app.post("/sotrudnik", async (req, res) => {
     const data = req.body
     const passport = data.passport.replace(/\D/g, '').slice(0, 10)
@@ -77,7 +94,7 @@ app.post("/sotrudnik/:id", async (req, res) => {
       data.salary,
       data.date_priema
     )
-    res.status(200).send('сотрудник обновлен');
+    res.redirect("/")
   }
 )
 app.use((err, req, res, next) => {
