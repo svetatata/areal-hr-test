@@ -50,6 +50,7 @@
             <th>Зарплата</th>
             <th>Дата приема</th>
             <th>Статус</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -73,6 +74,17 @@
               <td><%= sotrudnik.salary.toLocaleString('ru-RU') %> ₽</td>
               <td><%= new Date(sotrudnik.date_priema).toLocaleDateString('ru-RU') %></td>
               <td><%= sotrudnik.active == 0 ? 'Уволен' : 'Работает' %></td>
+              <td>
+                <% if (sotrudnik.active == 0) { %>
+                  <button type="submit" class="action-btn">
+                    <img src="/prinyat.png" alt="Принять" class="action-img">
+                  </button>
+                <% } else { %>
+                  <button type="submit" class="action-btn">
+                    <img src="/uvolit.png" alt="Уволить" class="action-img">
+                  </button>
+                <% } %>
+              </td>
             </tr>
           <% }) %>
         </tbody>
