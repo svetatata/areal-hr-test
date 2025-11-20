@@ -32,7 +32,12 @@
           <button type="submit">Применить</button>
           <a href="/">Сброс</a>
         </form>
-        <table class="sotr-table">
+        <div class="not-found <%= sotrudniki.length ? 'hidden' : '' %>">
+            <img src="/sad-pou.gif" alt="not-found-gif">
+            <p><%= status %>. Сотрудников не найдено</p>
+        </div>
+        
+        <table class="sotr-table <%= sotrudniki.length ? '' : 'hidden' %>">
             <thead>
           <tr>
             <th>ФИО</th>

@@ -13,7 +13,6 @@ body {
     margin-top: 5vh;
     margin-bottom: 5vh;
 }
-
 th, td {
     padding: 5px;
 }
@@ -38,9 +37,17 @@ button, a {
 .button {
     text-decoration: none;
 }
-.list .button {
+.list .button, .not-found {
     display: block;
     width: fit-content;
     margin: 20px auto;
     text-align: center;
+}
+.not-found img {
+    object-fit: cover; 
+    width: 150px;
+    height: 150px;
+}
+.hidden {
+    display: none;
 }

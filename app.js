@@ -4,7 +4,7 @@ import { getSotrudniki, getOtdels, getPos, createSotrudnik } from "./database.js
 const app = express()
 const port = 8080
 app.set("view engine", "ejs")
-app.use(express.static("views"))
+app.use(express.static("src"))
 app.use("/vendor", express.static("node_modules/imask/dist"))
 app.use(express.urlencoded({extended: true}))
 
@@ -16,13 +16,16 @@ app.get('/', async (req, res) => {
     const sotrudniki = await getSotrudniki(thisOtdel, thisPos, searchQ)
     const otdels = await getOtdels()
     const positions = await getPos()
-    res.render("index.ejs", {
+    const filtered = (thisOtdel || thisPos || searchQ) ? true : false
+    const status = sotrudniki.length === 0 && filtered ? 404 : 200
+    res.status(status).render("index.ejs", {
         sotrudniki,
         otdels,
         positions,
         thisOtdel,
         thisPos,
-        searchQ
+        searchQ,
+        status
     })
 })
 app.get("/createSotrudnik", async (req, res) => {
