@@ -32,8 +32,19 @@ export async function getSotrudniki(otdel = '', position = '', searchQ = '') {
     const [rows] = await pool.query(query, params)
     return rows
 }
-
-export async function createSotrudnik(last_name, first_name, middle_name, birth, passport, phone, address, otdel_id, position_id, salary, date_priema) {
+export async function createSotrudnik(
+    last_name,
+    first_name,
+    middle_name,
+    birth,
+    passport,
+    phone,
+    address,
+    otdel_id,
+    position_id,
+    salary,
+    date_priema
+) {
     let query = 'insert into sotrudniki (last_name, first_name, middle_name, birth, passport, phone, address, otdel_id, position_id, salary, date_priema) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
     const [res] = await pool.query(query, [
     last_name, first_name, middle_name, birth, passport,
@@ -41,7 +52,26 @@ export async function createSotrudnik(last_name, first_name, middle_name, birth,
     ])
     return res
 }
-
+export async function updateSotrudnik(
+    id,
+    last_name,
+    first_name,
+    middle_name,
+    birth,
+    passport,
+    phone,
+    address,
+    otdel_id,
+    position_id,
+    salary,
+    date_priema
+) {
+    let query = 'update sotrudniki set last_name = ?, first_name = ?, middle_name = ?, birth = ?, passport = ?, phone = ?, address = ?, otdel_id = ?, position_id = ?, salary = ?, date_priema = ? where id = ?';
+    const [res] = await pool.query(query, [
+        last_name, first_name, middle_name, birth, passport, phone, address, otdel_id, position_id, salary, date_priema, id
+    ])
+    return res
+}
 export async function getOtdels() {
     const [rows] = await pool.query('select * from otdels;');
     return rows

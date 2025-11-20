@@ -24,6 +24,7 @@ create table sotrudniki (
     position_id int not null,
     salary decimal(10,2) not null,
     date_priema date not null,
+    active tinyint(1) not null default 1,
     foreign key (otdel_id) references otdels(id),
     foreign key (position_id) references positions(id)
 );
