@@ -1,9 +1,10 @@
+import 'dotenv'
 import express from "express"
 import { getSotrudniki, getSotrudnik, getOtdels, getPos, createSotrudnik, updateSotrudnik, kickSotrudnik, hireSotrudnik } from "./database.js"
 import { formatDate } from "./utils.js"
 
 const app = express()
-const port = 8080
+const port = process.env.PORT || 8080
 app.set("view engine", "ejs")
 app.use(express.static("src"))
 app.use("/vendor", express.static("node_modules/imask/dist"))
