@@ -62,10 +62,11 @@
             <input type="date" name="date_priema" value="<%= sotr ? sotr.date_priema : '' %>" required>
 
             <div class="btns-action">
-                <a href="/">Отмена</a>
-                <button type="submit"><%= sotr ? 'Сохранить' : 'Создать' %></button>
+                <a href="/" class="button">Отмена</a>
+                <button type="submit" class="button"><%= sotr ? 'Сохранить' : 'Создать' %></button>
             </div>
         </form>
+        <button type="submit" class="button kick">Уволить сотрудника</button>
     </div>
     <script src="/vendor/imask.min.js"></script>
     <script>        

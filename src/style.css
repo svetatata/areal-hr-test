@@ -25,7 +25,8 @@ th, td {
 .filters input, .filters select {
     padding: 8px;
 }
-button, a {
+.button {
+    text-decoration: none;
     padding: 8px;
     border: none;
     border-radius: 5px;
@@ -33,15 +34,14 @@ button, a {
     color: #fff;
     background-color: #000000;
 }
-
-.button {
-    text-decoration: none;
-}
-.list .button, .not-found {
+.list .button, .not-found, .kick {
     display: block;
     width: fit-content;
     margin: 20px auto;
     text-align: center;
+}
+.filters .button {
+    margin: 0;
 }
 .not-found img {
     object-fit: cover; 
@@ -50,4 +50,12 @@ button, a {
 }
 .hidden {
     display: none;
+}
+.employee-link {
+    text-decoration: underline;
+    cursor: pointer;
+    color: inherit;
+}
+.inactive {
+    opacity: 0.6;
 }

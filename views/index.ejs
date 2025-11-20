@@ -29,8 +29,8 @@
                 </option>
               <% }) %>
           </select>
-          <button type="submit">Применить</button>
-          <a href="/">Сброс</a>
+          <button type="submit" class="button">Применить</button>
+          <a href="/" class="button">Сброс</a>
         </form>
         <div class="not-found <%= sotrudniki.length ? 'hidden' : '' %>">
             <img src="/sad-pou.gif" alt="not-found-gif">
@@ -49,12 +49,21 @@
             <th>Должность</th>
             <th>Зарплата</th>
             <th>Дата приема</th>
+            <th>Статус</th>
           </tr>
         </thead>
         <tbody>
           <% sotrudniki.forEach(sotrudnik => { %>
-            <tr>
-              <td><%= sotrudnik.last_name %> <%= sotrudnik.first_name %> <%= sotrudnik.middle_name %></td>
+            <tr class="<%= sotrudnik.active == 0 ? 'inactive' : '' %>">
+              <td>
+                <% if (sotrudnik.active != 0) { %>
+                  <a href="/sotrudnik/<%= sotrudnik.id %>" class="employee-link">
+                    <%= sotrudnik.last_name %> <%= sotrudnik.first_name %> <%= sotrudnik.middle_name %>
+                  </a>
+                <% } else { %>
+                  <%= sotrudnik.last_name %> <%= sotrudnik.first_name %> <%= sotrudnik.middle_name %>
+                <% } %>
+              </td>
               <td><%= new Date(sotrudnik.birth).toLocaleDateString('ru-RU') %></td>
               <td><%= sotrudnik.passport %></td>
               <td><%= sotrudnik.phone %></td>
@@ -63,6 +72,7 @@
               <td><%= sotrudnik.p_name %></td>
               <td><%= sotrudnik.salary.toLocaleString('ru-RU') %> ₽</td>
               <td><%= new Date(sotrudnik.date_priema).toLocaleDateString('ru-RU') %></td>
+              <td><%= sotrudnik.active == 0 ? 'Уволен' : 'Работает' %></td>
             </tr>
           <% }) %>
         </tbody>
