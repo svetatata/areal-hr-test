@@ -1,12 +1,12 @@
 import express from "express"
 import { getSotrudniki, getSotrudnik, getOtdels, getPos, createSotrudnik, updateSotrudnik } from "./database.js"
+import { formatDate } from "./utils.js"
 
 const app = express()
 const port = 8080
 app.set("view engine", "ejs")
 app.use(express.static("src"))
 app.use("/vendor", express.static("node_modules/imask/dist"))
-app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
 app.get('/', async (req, res) => {
@@ -51,10 +51,16 @@ app.get("/sotrudnik/:id", async (req, res) => {
     }
     const otdels = await getOtdels()
     const positions = await getPos()
+    const birthForm = formatDate(sotr.birth);
+    const datePriemaForm = formatDate(sotr.date_priema);
+
     res.render("sotrudnik.ejs", {
         otdels,
         positions,
-        sotr
+        sotr: Object.assign({}, sotr, {
+            birth: birthForm,
+            date_priema: datePriemaForm
+        })
     })
 })
 app.post("/sotrudnik", async (req, res) => {
