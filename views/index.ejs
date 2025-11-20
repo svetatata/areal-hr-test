@@ -76,13 +76,17 @@
               <td><%= sotrudnik.active == 0 ? 'Уволен' : 'Работает' %></td>
               <td>
                 <% if (sotrudnik.active == 0) { %>
-                  <button type="submit" class="action-btn">
-                    <img src="/prinyat.png" alt="Принять" class="action-img">
-                  </button>
+                  <form action="/sotrudnik/<%= sotrudnik.id %>/hire" method="post" class="inline">
+                    <button type="submit" class="action-btn">
+                      <img src="/prinyat.png" alt="Принять" title="Принять" class="action-img">
+                    </button>
+                  </form>
                 <% } else { %>
-                  <button type="submit" class="action-btn">
-                    <img src="/uvolit.png" alt="Уволить" class="action-img">
-                  </button>
+                  <form action="/sotrudnik/<%= sotrudnik.id %>/kick" method="post" class="inline">
+                    <button type="submit" class="action-btn">
+                      <img src="/uvolit.png" alt="Уволить" title="Уволить" class="action-img">
+                    </button>
+                  </form>
                 <% } %>
               </td>
             </tr>

@@ -70,3 +70,6 @@ th, td {
     height: 30px;
     object-fit: cover;
 }
+.inline {
+    display: inline;
+}

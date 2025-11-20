@@ -78,6 +78,16 @@ export async function updateSotrudnik(
     ])
     return res
 }
+export async function kickSotrudnik(id) {
+    const [res] = await pool.query('update sotrudniki set active = 0 where id = ?', [id])
+    return res
+}
+
+export async function hireSotrudnik(id) {
+    const [res] = await pool.query('update sotrudniki set active = 1 where id = ?', [id])
+    return res
+}
+
 export async function getOtdels() {
     const [rows] = await pool.query('select * from otdels;');
     return rows

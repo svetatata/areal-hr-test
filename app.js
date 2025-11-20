@@ -1,5 +1,5 @@
 import express from "express"
-import { getSotrudniki, getSotrudnik, getOtdels, getPos, createSotrudnik, updateSotrudnik } from "./database.js"
+import { getSotrudniki, getSotrudnik, getOtdels, getPos, createSotrudnik, updateSotrudnik, kickSotrudnik, hireSotrudnik } from "./database.js"
 import { formatDate } from "./utils.js"
 
 const app = express()
@@ -103,6 +103,16 @@ app.post("/sotrudnik/:id", async (req, res) => {
     res.redirect("/")
   }
 )
+app.post("/sotrudnik/:id/hire", async (req, res) => {
+    const id = req.params.id;
+    await hireSotrudnik(id);
+    res.redirect("/")
+})
+app.post("/sotrudnik/:id/kick", async (req, res) => {
+    const id = req.params.id;
+    await kickSotrudnik(id);
+    res.redirect("/")
+})
 app.use((err, req, res, next) => {
   console.error(err.stack)
   res.status(500).send('ломай ломай мы же миллионеры')
