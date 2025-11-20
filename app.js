@@ -29,7 +29,8 @@ app.get('/', async (req, res) => {
         status
     })
 })
-app.get("/sotrudnik", async (req, res) => {
+app.route('/sotrudnik')
+  .get(async(req, res) => {
     const otdels = await getOtdels()
     const positions = await getPos()
     
@@ -38,32 +39,8 @@ app.get("/sotrudnik", async (req, res) => {
         positions,
         sotr: null 
     })
-  } 
-)
-app.get("/sotrudnik/:id", async (req, res) => {
-    const id = req.params.id;
-    const sotr = await getSotrudnik(id)
-    if (!sotr) {
-        return res.status(404).send('кто это?')
-    }
-    if (sotr.active === 0) {
-        return res.status(403).send('ноу ноу ноу мистер фиш ю вонт эдит зис сотрудник')
-    }
-    const otdels = await getOtdels()
-    const positions = await getPos()
-    const birthForm = formatDate(sotr.birth);
-    const datePriemaForm = formatDate(sotr.date_priema);
-
-    res.render("sotrudnik.ejs", {
-        otdels,
-        positions,
-        sotr: Object.assign({}, sotr, {
-            birth: birthForm,
-            date_priema: datePriemaForm
-        })
-    })
-})
-app.post("/sotrudnik", async (req, res) => {
+  })
+  .post(async(req, res) => {
     const data = req.body
     const passport = data.passport.replace(/\D/g, '').slice(0, 10)
     await createSotrudnik(
@@ -80,12 +57,43 @@ app.post("/sotrudnik", async (req, res) => {
       data.date_priema
     )
     res.redirect("/")
-  }
-)
-app.post("/sotrudnik/:id", async (req, res) => {
+  })
+  
+app.route('/sotrudnik/:id')
+  .get(async (req, res) => {
+    const id = req.params.id;
+    const sotr = await getSotrudnik(id)
+    if (!sotr) {
+        return res.status(404).send('Сотрудник не найден')
+    }
+    if (sotr.active === 0) {
+        return res.status(403).send('Нельзя редактировать уволенного сотрудника')
+    }
+    const otdels = await getOtdels()
+    const positions = await getPos()
+    const birthForm = formatDate(sotr.birth);
+    const datePriemaForm = formatDate(sotr.date_priema);
+
+    res.render("sotrudnik.ejs", {
+        otdels,
+        positions,
+        sotr: Object.assign({}, sotr, {
+            birth: birthForm,
+            date_priema: datePriemaForm
+        })
+    })
+  })
+  .post(async (req, res) => {
     const id = req.params.id;
     const data = req.body;
     const passport = data.passport.replace(/\D/g, '').slice(0, 10);
+    const sotr = await getSotrudnik(id);
+    if (!sotr) {
+        return res.status(404).send('Сотрудник не найден');
+    }
+    if (sotr.active === 0) {
+        return res.status(403).send('Нельзя редактировать уволенного сотрудника');
+    }
     await updateSotrudnik(
       id,
       data.last_name,
@@ -101,8 +109,8 @@ app.post("/sotrudnik/:id", async (req, res) => {
       data.date_priema
     )
     res.redirect("/")
-  }
-)
+  })
+  
 app.post("/sotrudnik/:id/hire", async (req, res) => {
     const id = req.params.id;
     await hireSotrudnik(id);
@@ -114,9 +122,9 @@ app.post("/sotrudnik/:id/kick", async (req, res) => {
     res.redirect("/")
 })
 app.use((err, req, res, next) => {
-  console.error(err.stack)
-  res.status(500).send('ломай ломай мы же миллионеры')
+    console.error(err.stack)
+    res.status(500).send('Ошибка сервера')
 })
 app.listen(port, () => {
-    console.log('корабль прибыл в порт http://localhost:' + port)
+    console.log('Порт: http://localhost:' + port)
 })

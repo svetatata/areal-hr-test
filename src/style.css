@@ -7,6 +7,10 @@ body {
     font-family:'Courier New', Courier, monospace;
     font-size: 0.875rem;
 }
+button, input, textarea, select {
+    font-family: inherit;
+    font-size: inherit;
+}
 .container {
     max-width: 90vw;
     margin: 0 auto;
@@ -33,6 +37,7 @@ th, td {
     cursor: pointer;
     color: #fff;
     background-color: #000000;
+    line-height: 1.5;
 }
 .list .button, .not-found, .kick {
     display: block;
