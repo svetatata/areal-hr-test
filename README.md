@@ -5,10 +5,14 @@
 2. Установите зависимости `npm install`
 3. Создайте базу данных `mysql -u root -p < db.sql`
 4. Можно создать .env и настроить свои параметры (если изменили имя бд, измените его и в db.sql)
-<pre>DB_HOST=127.0.0.1
+```
+DB_HOST=127.0.0.1
 DB_USER=root
 DB_PASSWORD=
 DB_NAME=hr_tz_areal
-PORT=8080</pre>
+PORT=8080
+```
 5. `npm run dev` или `npm start`
 6. Сайт будет доступен по `http://localhost:8080`
+
+![Demo GIF](./src/ezgif-137185ae92730d76.gif)
